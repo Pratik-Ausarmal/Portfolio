@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pratik Ausarmal · Portfolio</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* (Your existing styles – unchanged) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0b1120;
+      color: #e2e8f0;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e293b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #06b6d4, #ec4899);
+      border-radius: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    nav {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #06b6d4, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #e2e8f0;
+      font-weight: 500;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #06b6d4, #ec4899);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #06b6d4, #ec4899);
+      color: white;
+      box-shadow: 0 10px 20px -8px #06b6d480;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px -8px #ec4899cc;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #06b6d4;
+      color: #06b6d4;
+      box-shadow: none;
+      margin-left: 1rem;
+    }
+
+    .btn-outline:hover {
+      background: #06b6d4;
+      color: #0b1120;
+    }
+
+    section {
+      padding: 6rem 0;
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      background: linear-gradient(135deg, #06b6d4, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-content {
+      flex: 1 1 350px;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #f1f5f9;
+    }
+
+    .hero-content .highlight {
+      background: linear-gradient(135deg, #06b6d4, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content .subtitle {
+      font-size: 1.5rem;
+      color: #94a3b8;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      margin-bottom: 2rem;
+      max-width: 550px;
+    }
+
+    .hero-image {
+      flex: 1 1 350px;
+      text-align: center;
+      animation: float 3s infinite ease-in-out;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 380px;
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      background: linear-gradient(145deg, #06b6d420, #ec489920);
+      padding: 0.5rem;
+      box-shadow: 0 30px 40px -20px #00000080;
+      transition: 0.5s;
+    }
+
+    .hero-image img:hover {
+      border-radius: 60% 40% 30% 70% / 50% 40% 50% 60%;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+    }
+
+    .skill-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .skill-item {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 0.7rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      border: 1px solid #334155;
+      transition: 0.2s;
+    }
+
+    .skill-item:hover {
+      border-color: #06b6d4;
+      box-shadow: 0 0 15px #06b6d4;
+      transform: scale(1.05);
+    }
+
+    .lang-badge {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 1px solid #ec4899;
+      color: white;
+      padding: 0.5rem 2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .exp-edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: rgba(30, 41, 59, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: 2rem;
+      padding: 2rem;
+      border: 1px solid #334155;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      border-color: #ec4899;
+      transform: translateY(-10px);
+      box-shadow: 0 20px 30px -10px #ec489980;
+    }
+
+    .card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      color: #f1f5f9;
+    }
+
+    .card .meta {
+      font-weight: 600;
+      color: #06b6d4;
+      margin-bottom: 1rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: #1e293b;
+      border-radius: 2rem;
+      overflow: hidden;
+      border: 1px solid #334155;
+      transition: 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: #06b6d4;
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px -10px #06b6d4;
+    }
+
+    .project-content {
+      padding: 2rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+      color: #f1f5f9;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.2rem 0;
+    }
+
+    .project-tags span {
+      background: #0f172a;
+      color: #ec4899;
+      padding: 0.3rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid #ec4899;
+    }
+
+    .project-link {
+      text-decoration: none;
+      font-weight: 600;
+      color: #06b6d4;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+    }
+
+    .contact-info {
+      background: #1e293b;
+      padding: 2rem;
+      border-radius: 2rem;
+      border: 1px solid #334155;
+    }
+
+    .contact-info p {
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #cbd5e1;
+    }
+
+    .contact-info i {
+      width: 30px;
+      color: #ec4899;
+      font-size: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .social-links a {
+      color: #94a3b8;
+      font-size: 2rem;
+      transition: 0.2s;
+    }
+
+    .social-links a:hover {
+      color: #06b6d4;
+      transform: scale(1.2);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #334155;
+      border-radius: 2rem;
+      font-family: 'Poppins', sans-serif;
+      background: #1e293b;
+      color: #e2e8f0;
+      transition: 0.2s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #06b6d4;
+      box-shadow: 0 0 0 4px #06b6d440;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: #64748b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      background: #0f172a;
+      border-top: 1px solid #1e293b;
+      color: #94a3b8;
+    }
+
+    /* Resume download button */
+    .resume-download {
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .resume-download .btn {
+      font-size: 1.2rem;
+      padding: 1rem 3rem;
+    }
+
+    /* responsive */
+    @media (max-width: 1024px){
+      .hero{
+        flex-direction:column;
+        text-align:center;
+      }
+      .hero-image img{
+        max-width:300px;
+      }
+      .hero-content h1{
+        font-size:3rem;
+      }
+    }
+
+    @media (max-width:768px){
+      .nav-wrapper{
+        flex-direction:column;
+        gap:15px;
+      }
+      .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:20px;
+      }
+      .about-grid{
+        grid-template-columns:1fr;
+      }
+      .contact-grid{
+        grid-template-columns:1fr;
+      }
+      .exp-edu-grid{
+        grid-template-columns:1fr;
+      }
+      .projects-grid{
+        grid-template-columns:1fr;
+      }
+      .hero-content h1{
+        font-size:2.5rem;
+      }
+      section{
+        padding:4rem 0;
+      }
+    }
+
+    @media (max-width:480px){
+      .container{
+        padding:0 1rem;
+      }
+      .logo{
+        font-size:1.3rem;
+        text-align:center;
+      }
+      .hero-content h1{
+        font-size:2rem;
+      }
+      .hero-content .subtitle{
+        font-size:1.1rem;
+      }
+      .hero-image img{
+        max-width:230px;
+      }
+      .btn{
+        padding:0.6rem 1.4rem;
+        font-size:14px;
+      }
+      .skill-item{
+        padding:0.5rem 1rem;
+        font-size:14px;
+      }
+      .project-card{
+        border-radius:1rem;
+      }
+      .contact-form input,
+      .contact-form textarea{
+        padding:0.8rem;
+        border-radius:1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-wrapper">
+      <div class="logo">Mr Pratik Nanasaheb Ausarmal</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#resume">Resume</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="container hero">
+      <div class="hero-content">
+        <h1>Pratik <span class="highlight">Ausarmal</span></h1>
+        <div class="subtitle">Full Stack Developer (Fresher)</div>
+        <p>
+          Motivated web developer with hands‑on experience in HTML, CSS, JavaScript, Bootstrap, 
+          Node.js, Express.js, and MySQL. I build responsive, user‑friendly web applications.
+        </p>
+        <a href="#contact" class="btn">Hire me</a>
+        <a href="#projects" class="btn btn-outline">See work</a>
+      </div>
+      <div class="hero-image">
+        <img src="WhatsApp Image 2026-03-05 at 13.20.50.jpeg" alt="Pratik Ausarmal">
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT + SKILLS -->
+  <section id="about">
+    <div class="container">
+      <h2>About me</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a <strong>motivated Web Developer fresher</strong> with hands‑on experience in building responsive web applications 
+            using HTML, CSS, JavaScript, and Bootstrap. Skilled in backend development with Node.js and Express.js, 
+            and database management using MySQL (CRUD operations). I've worked on academic and self‑learning projects 
+            involving REST APIs and Git/GitHub.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            📍 Based in Ashti, Beed, Maharashtra, India<br>
+            🎓 BCS (ongoing) – Dr. Babasaheb Ambedkar Marathwada University
+          </p>
+        </div>
+        <div>
+          <h3 style="margin-bottom: 1rem; color:#ec4899;">⚡ Key skills</h3>
+          <div class="skill-cloud">
+            <span class="skill-item">HTML</span>
+            <span class="skill-item">CSS</span>
+            <span class="skill-item">Bootstrap</span>
+            <span class="skill-item">JavaScript</span>
+            <span class="skill-item">Node.js</span>
+            <span class="skill-item">Express.js</span>
+            <span class="skill-item">MySQL</span>
+            <span class="skill-item">Git/GitHub</span>
+          </div>
+          <h3 style="margin: 2rem 0 1rem; color:#ec4899;">🗣️ Languages</h3>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <span class="lang-badge">MARATHI (native)</span>
+            <span class="lang-badge">HINDI (fluent)</span>
+            <span class="lang-badge">ENGLISH (professional)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE & EDUCATION + RESUME DOWNLOAD -->
+  <section id="resume">
+    <div class="container">
+      <h2>Experience & Education</h2>
+      <div class="exp-edu-grid">
+        <div class="card">
+          <h3>Full Stack Developer Intern</h3>
+          <div class="meta">A22 IT Hub · Jan 2026 – Present</div>
+          <p>Develop and maintain responsive client websites. Implement front‑end interfaces using HTML, CSS, JavaScript, Bootstrap. Build backend functionality with Node.js and Express.js.</p>
+        </div>
+        <div class="card">
+          <h3>BCS – Computer Science</h3>
+          <div class="meta">Dr. Babasaheb Ambedkar Marathwada University · 2026 (expected)</div>
+          <p>Final‑year student with focus on web development, databases, and software engineering.</p>
+        </div>
+        <div class="card">
+          <h3>Project‑based learning</h3>
+          <div class="meta">Self‑directed · 2025-2026</div>
+          <p>Built 3+ responsive websites using modern stack, REST APIs, and Git version control.</p>
+        </div>
+      </div>
+
+      <!-- RESUME DOWNLOAD BUTTON – updated with correct filename -->
+      <div class="resume-download">
+        <a href="Resume_Pratik (3).pdf" download class="btn">
+          <i class="fas fa-download" style="margin-right: 0.5rem;"></i>Download Resume (PDF)
+        </a>
+        <p style="margin-top: 1rem; color: #94a3b8; font-size: 0.9rem;">
+          Click to download my latest resume.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS (including Event Management System) -->
+  <section id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-content">
+            <h3>Responsive Portfolio Website</h3>
+            <p>Personal portfolio using HTML, CSS, Bootstrap. Implemented user input forms and basic database connectivity. Mobile‑friendly and cross‑browser compatible.</p>
+            <div class="project-tags">
+              <span>HTML</span><span>CSS</span><span>Bootstrap</span><span>Database</span>
+            </div>
+            <a href="#" class="project-link">Live demo <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-content">
+            <h3>Healthy Life Wellness Center</h3>
+            <p>Wellness website showcasing yoga, meditation, fitness. Built with HTML, CSS, Bootstrap, JavaScript. Includes contact form for inquiries.</p>
+            <div class="project-tags">
+              <span>HTML</span><span>CSS</span><span>Bootstrap</span><span>JavaScript</span>
+            </div>
+            <a href="#" class="project-link">Live demo <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-content">
+            <h3>Service Hub</h3>
+            <p>Service listing platform with responsive UI. Built with HTML, CSS, Bootstrap, JavaScript. User‑friendly navigation and service sections.</p>
+            <div class="project-tags">
+              <span>HTML</span><span>CSS</span><span>Bootstrap</span><span>JavaScript</span>
+            </div>
+            <a href="#" class="project-link">Live demo <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- Event Management System Project -->
+        <div class="project-card">
+          <div class="project-content">
+            <h3>Event Management System</h3>
+            <p>A full‑stack event management platform allowing users to create, view, and register for events. Built with Node.js, Express.js, MySQL, and Bootstrap for responsive design.</p>
+            <div class="project-tags">
+              <span>Node.js</span><span>Express.js</span><span>MySQL</span><span>Bootstrap</span><span>JavaScript</span>
+            </div>
+            <a href="#" class="project-link">Live demo <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2>Let's connect</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p><i class="fas fa-envelope"></i> pratikausarmal60@gmail.com</p>
+          <p><i class="fas fa-phone-alt"></i> +91 7499950217</p>
+          <p><i class="fas fa-map-marker-alt"></i> Ahilyanagar, Maharashtra, India</p>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/pratik-ausarmal-3932112b3" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="contact-form">
+          <form action="#" method="post">
+            <input type="text" placeholder="Your name" required>
+            <input type="email" placeholder="Email address" required>
+            <textarea rows="5" placeholder="Your message" required></textarea>
+            <button type="submit" class="btn" style="width: 100%;">Send message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 Pratik Ausarmal. </p>
+    </div>
+  </footer>
+</body>
+</html>
