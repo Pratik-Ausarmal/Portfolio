@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pratik Ausarmal | Full Stack Developer</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* same styles as before — keeping design consistent */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: #f7fafd;
+      color: #1e293b;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .blob {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(56, 189, 248, 0.08));
+      filter: blur(70px);
+      z-index: -1;
+    }
+    .b1 { top: -100px; left: -100px; }
+    .b2 { bottom: -100px; right: -100px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(168, 85, 247, 0.05)); }
+
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+      z-index: 100;
+      border-bottom: 1px solid rgba(203, 213, 225, 0.3);
+    }
+
+    .header-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 75px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0f172a, #334155);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+
+    .nav {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-link {
+      text-decoration: none;
+      font-weight: 500;
+      color: #334155;
+      transition: 0.2s;
+    }
+    .nav-link:hover { color: #0284c7; }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .mini-btn {
+      background: #0f172a;
+      color: white;
+      padding: 0.6rem 1.4rem;
+      border-radius: 40px;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.2s;
+    }
+    .mini-btn:hover { background: #1e293b; }
+
+    .icon-btn {
+      background: none;
+      border: 1px solid #cbd5e1;
+      font-size: 1.5rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: white;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: white;
+      padding: 1rem 2rem;
+      border-top: 1px solid #e2e8f0;
+    }
+    .mobile-nav a {
+      padding: 0.8rem 0;
+      text-decoration: none;
+      color: #1e293b;
+      font-weight: 500;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .mobile-nav a:last-child { border: none; }
+
+    .section {
+      padding: 6rem 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+    .section-head h2 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0f172a, #2563eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .section-head p {
+      color: #475569;
+      font-size: 1.2rem;
+    }
+
+    .hero {
+      padding: 8rem 0 4rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* coding background pattern */
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" opacity="0.15"><text x="10" y="30" font-family="monospace" font-size="18" fill="%232563eb">&lt;html&gt;</text><text x="120" y="70" font-family="monospace" font-size="18" fill="%232563eb">&lt;/&gt;</text><text x="30" y="120" font-family="monospace" font-size="18" fill="%232563eb">function</text><text x="140" y="160" font-family="monospace" font-size="18" fill="%232563eb">{ }</text><text x="50" y="190" font-family="monospace" font-size="18" fill="%232563eb">const</text><text x="10" y="80" font-family="monospace" font-size="18" fill="%232563eb">let</text><text x="100" y="20" font-family="monospace" font-size="18" fill="%232563eb">if()</text><text x="70" y="150" font-family="monospace" font-size="18" fill="%232563eb">else</text><text x="160" y="110" font-family="monospace" font-size="18" fill="%232563eb">//</text></svg>');
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .pill {
+      background: rgba(226, 232, 240, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      color: #0f172a;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(4px);
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    h1 span {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      color: #334155;
+      margin: 1.8rem 0;
+      max-width: 550px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2.5rem 0;
+    }
+    .btn {
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.2s;
+    }
+    .primary {
+      background: #0f172a;
+      color: white;
+    }
+    .primary:hover { background: #1e293b; }
+    .ghost {
+      border: 1.5px solid #cbd5e1;
+      color: #1e293b;
+    }
+    .ghost:hover { border-color: #0284c7; background: #f0f9ff; }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+    .stat-no {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .stat-txt { color: #475569; }
+
+    .photo-card {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      margin: 0 auto 2rem;
+      overflow: hidden;
+      box-shadow: 0 20px 40px -10px rgba(37,99,235,0.3);
+    }
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mix-blend-mode: luminosity;
+      opacity: 0.9;
+    }
+    .photo-glow {
+      position: absolute;
+      inset: 0;
+      box-shadow: inset 0 0 30px #ffffff80;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .mini-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    .mini-ico {
+      background: #dbeafe;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2563eb;
+    }
+    .mini-title { font-weight: 700; }
+    .mini-sub { font-size: 0.8rem; color: #64748b; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .glass {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(12px);
+      padding: 2rem;
+      border-radius: 32px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1.5rem 0;
+    }
+    .chips span {
+      background: #e2e8f0;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+    }
+    .clean-list {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    .clean-list li {
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .clean-list i { color: #2563eb; width: 20px; }
+
+    .social-row {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    .social {
+      background: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #0f172a;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      transition: 0.2s;
+    }
+    .social:hover { background: #2563eb; color: white; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .skill-top {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .bar {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #2563eb, #7c3aed);
+      border-radius: 10px;
+      transition: width 1s ease;
+      width: var(--w);
+    }
+
+    .tool-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .tag {
+      background: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 500;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .project {
+      background: white;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px -10px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    .project:hover { transform: translateY(-8px); }
+    .p-img {
+      height: 200px;
+      overflow: hidden;
+    }
+    .p-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .p-body {
+      padding: 1.8rem;
+    }
+    .p-body h3 { margin-bottom: 0.6rem; }
+    .muted { color: #64748b; margin-bottom: 1rem; }
+    .p-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.2rem 0;
+    }
+    .p-tags span {
+      background: #e2e8f0;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+    }
+    .p-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .btn.sm { padding: 0.5rem 1.2rem; font-size: 0.9rem; }
+
+    .exp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .exp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .pill2 {
+      background: #dbeafe;
+      padding: 0.2rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1e4f8a;
+    }
+
+    .edu-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin: 1.5rem 0;
+    }
+    .edu-dot {
+      width: 12px;
+      height: 12px;
+      background: #2563eb;
+      border-radius: 50%;
+      margin-top: 6px;
+    }
+
+    .resume-box {
+      background: #f1f5f9;
+      border-radius: 24px;
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .info div {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 1rem 0;
+    }
+    .whats {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 1.5rem;
+    }
+
+    .field {
+      margin-bottom: 1.5rem;
+    }
+    .field label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .field input, .field textarea {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      background: white;
+    }
+
+    .form-status {
+      margin-top: 1rem;
+      padding: 0.8rem;
+      border-radius: 16px;
+      font-weight: 500;
+      display: none;
+    }
+    .form-status.success {
+      background: #d1fae5;
+      color: #065f46;
+      display: block;
+    }
+    .form-status.error {
+      background: #fee2e2;
+      color: #991b1b;
+      display: block;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 4rem;
+      color: #64748b;
+    }
+
+    .to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #0f172a;
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      z-index: 99;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: 0.7s;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .about-grid, .exp-grid, .contact-grid { grid-template-columns: 1fr; }
+      .nav { display: none; }
+      .icon-btn { display: flex; }
+      .mobile-nav.active { display: flex; }
+      h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header-wrap">
+      <a class="logo" href="#home">Mr.Pratik<span></span></a>
+      <nav class="nav" id="nav">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a class="mini-btn" href="#contact"><i class="fa-solid fa-paper-plane"></i> Hire Me</a>
+        <button class="icon-btn" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#home">Home</a> <a href="#about">About</a> <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a> <a href="#experience">Experience</a> <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-left reveal">
+        <div class="pill"><i class="fa-solid fa-code"></i> Full Stack Developer • Fresher</div>
+        <h1>Hello, I’m <span>Pratik Ausarmal</span></h1>
+        <p class="hero-sub"><b>HTML, CSS, Bootstrap, JavaScript</b> and backend with <b>Node.js, Express, MySQL</b>. I build clean, responsive web apps.</p>
+        <div class="hero-badges">
+          <div class="badge"><i class="fa-solid fa-location-dot"></i> Beed , MH</div>
+          <div class="badge"><i class="fa-solid fa-envelope"></i> pratikausarmal60@gmail.com</div>
+          <div class="badge"><i class="fa-solid fa-phone"></i> 7499950217</div>
+        </div>
+        <div class="hero-cta">
+          <a class="btn primary" href="#projects"><i class="fa-solid fa-eye"></i> View Projects</a>
+          <a class="btn ghost" target="_blank" href="https://www.linkedin.com/in/pratik-ausarmal-3932112b3"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+          <a class="btn ghost" target="_blank" href="https://wa.me/917499950217?text=Hello%20Pratik"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-card"><div class="stat-no">4+</div><div class="stat-txt">Projects</div></div>
+          <div class="stat-card"><div class="stat-no">10+</div><div class="stat-txt">Skills</div></div>
+          <div class="stat-card"><div class="stat-no">∞</div><div class="stat-txt">Learning</div></div>
+        </div>
+      </div>
+      <div class="hero-right reveal">
+        <div class="photo-card">
+          <!-- Replace with your actual image path -->
+          <img src="WhatsApp Image 2026-03-05 at 13.20.50.jpeg" alt="Pratik">
+          <div class="photo-glow"></div>
+        </div>
+        <div class="mini-grid">
+          <div class="mini-card"><div class="mini-ico"><i class="fa-solid fa-laptop-code"></i></div><div><div class="mini-title">Frontend</div><div class="mini-sub">HTML • CSS • Bootstrap</div></div></div>
+          <div class="mini-card"><div class="mini-ico"><i class="fa-solid fa-server"></i></div><div><div class="mini-title">Backend</div><div class="mini-sub">Node • Express</div></div></div>
+          <div class="mini-card"><div class="mini-ico"><i class="fa-solid fa-database"></i></div><div><div class="mini-title">Database</div><div class="mini-sub">MySQL • SQL</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head reveal"><h2>About Me</h2><p>Motivated Web Developer fresher with hands‑on experience in building responsive web applications.</p></div>
+      <div class="about-grid">
+        <div class="glass reveal">
+          <h3><i class="fa-solid fa-user"></i> Profile</h3>
+          <br>
+          <p class="muted">Fresher developer skilled in frontend (HTML, CSS, Bootstrap, JS) and backend (Node.js, Express, MySQL). Worked on academic projects involving REST APIs, Git/GitHub, and CRUD operations.</p>
+          <div class="chips"><span>Responsive UI</span><span>CRUD</span><span>REST APIs</span><span>MySQL</span></div>
+        </div>
+        <div class="glass reveal">
+          <h3><i class="fa-solid fa-language"></i> Languages</h3>
+          <ul class="clean-list"><li><i class="fa-solid fa-check"></i> Marathi — Native</li><li><i class="fa-solid fa-check"></i> Hindi — Proficient</li><li><i class="fa-solid fa-check"></i> English — Proficient</li></ul>
+          <div class="social-row">
+            <a class="social" target="_blank" href="https://www.linkedin.com/in/pratik-ausarmal-3932112b3"><i class="fa-brands fa-linkedin"></i></a>
+            <a class="social" href="mailto:pratikausarmal60@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+            <a class="social" href="tel:+917499950217"><i class="fa-solid fa-phone"></i></a>
+            <a class="social" target="_blank" href="https://wa.me/917499950217"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-head reveal"><h2>Skills</h2><p>Technologies I work with</p></div>
+      <div class="skills-grid">
+        <div class="skill reveal"><div class="skill-top"><span>HTML</span><span>90%</span></div><div class="bar"><div class="fill" style="--w:90%"></div></div></div>
+        <div class="skill reveal"><div class="skill-top"><span>CSS</span><span>85%</span></div><div class="bar"><div class="fill" style="--w:85%"></div></div></div>
+        <div class="skill reveal"><div class="skill-top"><span>Bootstrap</span><span>85%</span></div><div class="bar"><div class="fill" style="--w:85%"></div></div></div>
+        <div class="skill reveal"><div class="skill-top"><span>JavaScript</span><span>80%</span></div><div class="bar"><div class="fill" style="--w:80%"></div></div></div>
+        <div class="skill reveal"><div class="skill-top"><span>Node.js</span><span>75%</span></div><div class="bar"><div class="fill" style="--w:75%"></div></div></div>
+        <div class="skill reveal"><div class="skill-top"><span>Express.js</span><span>70%</span></div><div class="bar"><div class="fill" style="--w:70%"></div></div></div>
+        <div class="skill reveal"><div class="skill-top"><span>MySQL</span><span>75%</span></div><div class="bar"><div class="fill" style="--w:75%"></div></div></div>
+        <div class="skill reveal"><div class="skill-top"><span>Git/GitHub</span><span>70%</span></div><div class="bar"><div class="fill" style="--w:70%"></div></div></div>
+      </div>
+      <div class="tool-tags reveal"><span class="tag">REST APIs</span><span class="tag">Postman</span><span class="tag">VS Code</span><span class="tag">Git</span></div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-head reveal"><h2>Projects</h2><p>Academic & self‑learning work</p></div>
+      <div class="projects-grid">
+        <article class="project reveal">
+          <div class="p-img"><img src="man-stares-intently-computer-screen-dark-night-copy-space.jpg" alt="portfolio"></div>
+          <div class="p-body"><h3>Responsive Portfolio Website</h3><p class="muted">Personal portfolio with HTML, CSS, Bootstrap. Implemented input forms and basic database connectivity. Mobile‑friendly layout.</p><div class="p-tags"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>Node.js</span><span>MySQL</span></div><div class="p-actions"><a class="btn primary sm" href="#contact">Demo</a><a class="btn ghost sm" href="#">GitHub</a></div></div>
+        </article>
+        <article class="project reveal">
+          <div class="p-img"><img src="zumba.jpg" alt="wellness"></div>
+          <div class="p-body"><h3>HEALTHY LIFE WELLNESS CENTER</h3><p class="muted">Wellness website using HTML, CSS, Bootstrap, JS. Showcases yoga, meditation, fitness. Contact form for inquiries.</p><div class="p-tags"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>JavaScript</span></div><div class="p-actions"><a class="btn primary sm" href="#contact">Demo</a><a class="btn ghost sm" href="#">GitHub</a></div></div>
+        </article>
+        <article class="project reveal">
+          <div class="p-img"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=60" alt="servicehub"></div>
+          <div class="p-body"><h3>SERVICE HUB</h3><p class="muted">Service listing platform. Responsive UI with HTML, CSS, Bootstrap, JavaScript. User‑friendly navigation and service sections.</p><div class="p-tags"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>JavaScript</span></div><div class="p-actions"><a class="btn primary sm" href="#contact">Demo</a><a class="btn ghost sm" href="#">GitHub</a></div></div>
+        </article>
+        <article class="project reveal">
+          <div class="p-img"><img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=1200&q=60" alt="event management"></div>
+          <div class="p-body"><h3>Event Management System</h3><p class="muted">Full‑stack platform to create, manage and register for events. Includes admin panel, scheduling, and user authentication. Built with Node.js, Express, MySQL, and Bootstrap.</p><div class="p-tags"><span>Node.js</span><span>Express</span><span>MySQL</span><span>Bootstrap</span><span>JavaScript</span></div><div class="p-actions"><a class="btn primary sm" href="#contact">Demo</a><a class="btn ghost sm" href="#">GitHub</a></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience & Education -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="section-head reveal"><h2>Experience</h2><p>Internship & qualifications</p></div>
+      <div class="exp-grid">
+        <div class="glass reveal">
+          <div class="exp-top"><div><h3>Full Stack Developer Intern</h3><div class="muted">A22 IT Hub</div></div><span class="pill2">Jan 2026 - Present</span></div>
+          <ul class="clean-list"><li><i class="fa-solid fa-check"></i> Developed responsive client websites using HTML, CSS, Bootstrap, JavaScript</li><li><i class="fa-solid fa-check"></i> Built backend functionality with Node.js and Express.js</li><li><i class="fa-solid fa-check"></i> Integrated MySQL for CRUD operations & worked with REST APIs</li><li><i class="fa-solid fa-check"></i> Used Git/GitHub for version control</li></ul>
+        </div>
+        <div class="glass reveal">
+          <h3><i class="fa-solid fa-graduation-cap"></i> Education</h3>
+          <div class="edu-item"><div class="edu-dot"></div><div><b>BCS - Bachelor of Computer Science</b><div class="muted">Dr. Babasaheb Ambedkar Marathwada University, Aurangabad (2026)</div></div></div>
+          <!-- RESUME DOWNLOAD BUTTON -->
+          <div class="resume-box">
+            <div><b>Resume</b><div class="muted">Download PDF (actual resume)</div></div>
+            <a class="btn primary sm" href="#" id="downloadResumeBtn"><i class="fa-solid fa-download"></i> Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact - Email Form -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-head reveal"><h2>Contact</h2><p>Send me a message directly via Email</p></div>
+      <div class="contact-grid">
+        <div class="glass reveal">
+          <h3>Get in touch</h3>
+          <div class="info"><div><i class="fa-solid fa-phone"></i> 7499950217</div><div><i class="fa-solid fa-envelope"></i> pratikausarmal60@gmail.com</div><div><i class="fa-solid fa-location-dot"></i> Beed, Maharashtra</div></div>
+          <div class="social-row">
+            <a class="social" target="_blank" href="https://www.linkedin.com/in/pratik-ausarmal-3932112b3"><i class="fa-brands fa-linkedin"></i></a>
+            <a class="social" href="mailto:pratikausarmal60@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+            <a class="social" href="tel:+917499950217"><i class="fa-solid fa-phone"></i></a>
+            <a class="social" target="_blank" href="https://wa.me/917499950217"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+          <a class="whats" target="_blank" href="mailto:pratikausarmal60@gmail.com?subject=Hello%20Pratik"><i class="fa-solid fa-envelope"></i> Email me</a>
+        </div>
+        <div class="glass reveal">
+          <h3>Send a message (opens Email app)</h3>
+          <br>
+          <form id="emailForm">
+            <div class="field">
+              <label>Your Name *</label>
+              <input type="text" id="emailName" placeholder="Full Name" required>
+            </div>
+            <div class="field">
+              <label>Your Email *</label>
+              <input type="email" id="emailEmail" placeholder="Email" required>
+            </div>
+            <div class="field">
+              <label>Message *</label>
+              <textarea id="emailMessage" rows="4" placeholder="I'd like to discuss a project..." required></textarea>
+            </div>
+            <button class="btn primary full" type="submit" id="emailSubmitBtn"><i class="fa-solid fa-envelope"></i> Send via Email</button>
+            <div id="emailFormStatus" class="form-status"></div>
+          </form>
+          <p class="muted" style="margin-top: 1rem; font-size: 0.85rem;">
+            ⚡ Clicking send will open your email app with a pre‑filled message. Just press send to deliver.
+          </p>
+        </div>
+      </div>
+      <div class="copyright">© 2026 Pratik Ausarmal. All rights reserved.</div>
+    </div>
+  </section>
+
+  <button class="to-top" id="toTop"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    menuBtn.addEventListener('click', () => {
+      mobileNav.classList.toggle('active');
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    function revealCheck() {
+      for (let el of reveals) {
+        const windowHeight = window.innerHeight;
+        const elTop = el.getBoundingClientRect().top;
+        if (elTop < windowHeight - 100) el.classList.add('active');
+      }
+    }
+    window.addEventListener('scroll', revealCheck);
+    window.addEventListener('load', revealCheck);
+
+    // Back to top
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) toTop.style.display = 'flex';
+      else toTop.style.display = 'none';
+    });
+    toTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
+      link.addEventListener('click', () => mobileNav.classList.remove('active'));
+    });
+
+    // ---------- RESUME DOWNLOAD FUNCTIONALITY ----------
+    function downloadResume() {
+      const resumeText = `PERSONAL INFORMATION
+Email: pratikausarmal60@gmail.com
+Mobile: (+91) 7499950217
+LinkedIn: www.linkedin.com/in/pratik-ausarmal-3932112b3
+
+PROFILE SUMMARY
+Motivated Web Developer fresher with hands-on experience in building responsive web applications using HTML, CSS, JavaScript, and Bootstrap. Skilled in backend development with Node.js and Express.js and database management using MySQL including CRUD operations. Experience working on academic and self-learning projects involving REST APIs and Git/GitHub.
+
+KEY SKILLS
+HTML, CSS, Bootstrap, JavaScript, Node.js, Express.js, MySQL
+
+LANGUAGES
+Marathi, Hindi, English
+
+EDUCATION
+BCS - Bachelor of Computer Science
+Dr. Babasaheb Ambedkar Marathwada University, Aurangabad (2026)
+
+INTERNSHIP
+Full Stack Developer Intern @ A22 IT Hub (Jan 2026 - Present)
+- Developed responsive client websites using HTML, CSS, JavaScript, Bootstrap
+- Built backend functionality using Node.js and Express.js
+
+PROJECTS
+1. Responsive Portfolio Website (15 days) – HTML, CSS, Bootstrap, database connectivity.
+2. HEALTHY LIFE WELLNESS CENTER (15 days) – HTML, CSS, Bootstrap, JavaScript, contact form.
+3. SERVICE HUB (15 days) – HTML, CSS, Bootstrap, JavaScript, service listing.
+4. Event Management System – Full-stack event platform with Node.js, Express, MySQL, Bootstrap.`;
+
+      const blob = new Blob([resumeText], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Pratik_Ausarmal_Resume.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    const downloadBtn = document.getElementById('downloadResumeBtn');
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        downloadResume();
+      });
+    }
+
+    // ---------- EMAIL FORM ----------
+    const emailForm = document.getElementById('emailForm');
+    const emailStatus = document.getElementById('emailFormStatus');
+    const emailAddress = 'pratikausarmal60@gmail.com';
+
+    emailForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('emailName').value.trim();
+      const email = document.getElementById('emailEmail').value.trim();
+      const message = document.getElementById('emailMessage').value.trim();
+
+      if (!name || !email || !message) {
+        emailStatus.className = 'form-status error';
+        emailStatus.textContent = '❌ Please fill in all fields.';
+        return;
+      }
+
+      // Construct email subject and body
+      const subject = `New message from ${name}`;
+      const body = `Name: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`;
+      const mailtoLink = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+      // Open email client
+      window.location.href = mailtoLink;
+
+      // Show status
+      emailStatus.className = 'form-status success';
+      emailStatus.textContent = '✅ Email app opened. Just press send!';
+
+      // Optionally reset form
+      emailForm.reset();
+    });
+  </script>
+</body>
+</html>
